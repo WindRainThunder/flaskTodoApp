@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, url_for, redirect
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="assets")
+
 
 def get_db_connection():
     conn = sqlite3.connect(".\\databases\\todo.db")
