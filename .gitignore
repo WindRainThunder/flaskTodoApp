@@ -1,3 +1,4 @@
-__pycache__/
-flaskToDoApp/
+__pycache__
+flaskToDoApp
 starter.bat
+node_modules
