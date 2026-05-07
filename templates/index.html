@@ -1,53 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Todo app</title>
-    </head>
-    <body>
-        <h1>Todo App</h1>
-        <form action="/add" method="post">
-            <div>
-                <label for="title">Todo title</label>
-                <input type="text" name="title" placeholder="Enter title..." required>
-                <br>
-                <label for="title">Todo description</label>
-                <input type="text" name="description" placeholder="Enter description..." required>
-                <br>
-                <button type="submit">Add</button>
-            </div>
-        </form>
 
-        <h2>Task list</h2>
-        <h3>Not Completed</h3>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+
+<body class="bg-slate-100 text-slate-900 p-20 ">
+    <section
+        class="mx-auto mb-10 max-w-3xl rounded-2xl bg-[#fff7a6] p-6 shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-yellow-200">
+        <div class="mb-6">
+            <p class="text-sm uppercase tracking-[0.2em] text-slate-500">Create note</p>
+            <h2 class="mt-2 text-2xl font-black text-slate-900">Add a new task</h2>
+            <p class="mt-2 text-sm text-slate-600">Write a short title and a clear description.</p>
+        </div>
+
+        <form action="/add" method="post" class="space-y-5">
+            <div>
+                <label for="title" class="block text-sm font-semibold text-slate-800">Title</label>
+                <input id="title" name="title" type="text" placeholder="Enter title..." required
+                    class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-300">
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-semibold text-slate-800">Description</label>
+                <textarea id="description" name="description" rows="4" placeholder="Enter description..." required
+                    class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-300"></textarea>
+            </div>
+
+            <button type="submit"
+                class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+                Add note
+            </button>
+        </form>
+    </section>
+    <div class="mb-8 px-1">
+        <p class="text-sm uppercase tracking-[0.22em] text-slate-500">Task manager</p>
+        <h1 class="mt-2 text-4xl font-black tracking-tight text-slate-900">
+            Sticky Tasks
+        </h1>
+        <p class="mt-2 text-base text-slate-600">
+            Capture ideas, manage work, and keep every task in sight.
+        </p>
+    </div>
+    <span
+        class="inline-flex items-center gap-2 rounded-full bg-amber-900/10 px-3 py-1 m-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-900">
+        Not Completed
+    </span>
+    <div class="grid grid-cols-4 ">
         {% for task in tasks %}
-            {% if task["status"] == "todo" %}                 
+        {% if task["status"] == "todo" %}
+        <div
+            class="bg-[#fff7a6] rounded-sm p-6 shadow-[0_10px_20px_rgba(0,0,0,0.14)] rotate-[-1deg] flex flex-col min-h-[320px] border border-yellow-200">
+            <div class="space-y-4 flex-1">
                 <div>
-                    <h3>Title: {{ task["title"] }}</h3>
-                    <p>Description: {{ task["description"] }}</p>
-                    <small>Status: {{ task["status"] }}</small>
+                    <p class="mt-2 text-2xl font-extrabold leading-tight text-slate-900 break-words">Title: {{
+                        task["title"] }}</p>
+                    <p class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Status: {{
+                        task["status"] }}</p>
+                    <p class="text-xs uppercase tracking-[0.18em] text-slate-500 break-words">Description: {{
+                        task["description"] }}</p>
+
+                    <div class="flex gap-3 pt-6 mt-auto">
+                        <form class="w-1/2" action="{{url_for('update_task', task_id=task['id']) }}" method="post">
+                            <button
+                                class="w-full rounded-lg bg-green-900 px-4 py-3 text-sm font-semibold text-white hover:bg-green-800 transition"
+                                type="submit">Completed</button>
+                        </form>
+                        <form class="w-1/2" action="{{url_for('delete_task', task_id=task['id']) }}" method="post">
+                            <button
+                                class="w-full rounded-lg bg-rose-700 px-4 py-3 text-sm font-semibold text-white hover:bg-rose-800 transition"
+                                type="submit">Delete</button>
+                        </form>
+                    </div>
                 </div>
-                <hr>
-                <!-- <a href="/update/{{task['id']}}">Update</a>
-                -->
-                <form action="{{url_for('update_task', task_id=task['id']) }}" method="post">
-                    <button type="submit">Update</button>
-                </form>
-                <form action="{{url_for('delete_task', task_id=task['id']) }}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-            {% endif %}    
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
-        <h2>Completed</h2>
-        {% for task in tasks %}        
-            {% if task["status"] == "completed" %}    
-                <div>
-                    <h3>Title: {{ task["title"] }}</h3>
-                    <p>Description: {{ task["description"] }}</p>
-                    <small>Status: {{ task["status"] }}</small>
-                </div>
-            {% endif %}
-            {% endfor %}
-    </body>
+    </div>
+    <span
+        class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 m-10 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">Completed
+    </span>
+    <div class="grid grid-cols-4">
+        {% for task in tasks %}
+        {% if task["status"] == "completed" %}
+        <div
+            class="bg-[#fff7a6] rounded-sm p-6 shadow-[0_10px_20px_rgba(0,0,0,0.14)] rotate-[-1deg] flex flex-col min-h-[320px] border border-yellow-200">
+            <p class="mt-2 text-2xl font-extrabold leading-tight text-slate-900 break-words">Title: {{ task["title"] }}
+                </h3>
+            <p class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Status: {{
+                task["status"] }}</p>
+            <p class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Description: {{
+                task["description"] }}</p>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+</body>
+
 </html>
