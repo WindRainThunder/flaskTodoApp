@@ -29,7 +29,7 @@ tasks = [
 ]
 
 connection.executemany(
-    "INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)",
+    "INSERT INTO tasks (title, description, status, user_id) VALUES (?, ?, ?, 1)",
     tasks
 )
 
