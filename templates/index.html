@@ -9,6 +9,24 @@
 </head>
 
 <body class="bg-slate-100 text-slate-900 p-20 ">
+    <header class="w-full px-6 pt-6">
+        <div class="flex w-full">
+            <div
+                class="ml-auto flex items-center gap-3 rounded-2xl bg-white/70 px-3 py-3 shadow-sm ring-1 ring-slate-900/5 backdrop-blur-sm">
+                <div class="rounded-xl bg-[#fff7c2] px-3 py-2 shadow-sm ring-1 ring-yellow-200">
+                    <div class="leading-tight">
+                        <p class="text-[11px] uppercase tracking-[0.18em] text-slate-500">Logged in as</p>
+                        <p class="text-sm font-semibold text-slate-900">{{ username }}</p>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('logout') }}"
+                    class="inline-flex items-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </header>
     <section
         class="mx-auto mb-10 max-w-3xl rounded-2xl bg-[#fff7a6] p-6 shadow-[0_12px_24px_rgba(0,0,0,0.12)] border border-yellow-200">
         <div class="mb-6">

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Todo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-200 text-slate-900">
+    <main class="flex min-h-screen items-center justify-center px-6 py-12">
+        <section
+            class="relative w-full max-w-xl rotate-[-1deg] rounded-[28px] bg-[#fff799] p-8 shadow-[0_18px_40px_rgba(15,23,42,0.18)] border border-yellow-200">
+            <div
+                class="absolute left-1/2 top-0 h-8 w-28 -translate-x-1/2 -translate-y-1/2 rotate-[-3deg] rounded-md bg-white/40 backdrop-blur-sm">
+            </div>
+
+            <div class="mb-8">
+                <p class="text-sm uppercase tracking-[0.22em] text-slate-500">Create account</p>
+                <h1 class="mt-2 text-4xl font-black tracking-tight text-slate-900">Register</h1>
+                <p class="mt-2 text-base text-slate-600">
+                    Create your account and start organizing your sticky tasks.
+                </p>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="mb-5 rounded-2xl bg-white/70 px-4 py-3 text-sm text-red-700 shadow-sm">
+                {{ messages[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form method="post" class="space-y-5">
+                <div>
+                    <label for="username" class="block text-sm font-semibold text-slate-800">
+                        Username
+                    </label>
+                    <input id="username" name="username" type="text" required placeholder="Choose a username"
+                        class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-300">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-slate-800">
+                        Password
+                    </label>
+                    <input id="password" name="password" type="password" required placeholder="Create a password"
+                        class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-300">
+                </div>
+
+                <button type="submit"
+                    class="w-full rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+                    Create account
+                </button>
+            </form>
+
+            <p class="mt-6 text-sm text-slate-600">
+                Already have an account?
+                <a href="{{ url_for('login') }}" class="font-semibold text-slate-900 underline underline-offset-4">
+                    Log in
+                </a>
+            </p>
+        </section>
+    </main>
+</body>
+
+</html>
