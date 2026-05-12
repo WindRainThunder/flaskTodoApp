@@ -19,7 +19,17 @@
                     Access your sticky tasks and manage your notes in one place.
                 </p>
             </div>
-
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="mb-4 space-y-2">
+                {% for message in messages %}
+                <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
             <form method="post" class="space-y-5">
                 <div>
                     <label for="username" class="block text-sm font-semibold text-slate-800">
