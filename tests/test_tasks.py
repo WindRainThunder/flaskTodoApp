@@ -7,7 +7,7 @@ def login(client):
         follow_redirects=True,
     )
 
-def test_add_note(client, cleanup_tasks):   
+def test_add_task(client, cleanup_tasks):   
     login(client)
     title = "Shopping"
     description = "Buy milk"

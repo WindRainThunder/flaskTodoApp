@@ -3,7 +3,7 @@ def test_register_page_opens(client):
 
     assert response.status_code == 200
 
-def test_register_creates_user(client, cleanup_users):
+def test_register_create_user(client, cleanup_users):
     username = "testRegister"
     password = "testRegisterPassword"
 
@@ -21,7 +21,7 @@ def test_register_creates_user(client, cleanup_users):
 
     assert len(response.history) >= 1
     assert response.history[0].status_code in (302, 303)    
-    assert response.history[0].headers["Location"].endswith("/login")
+    assert response.history[0].headers["Location"] == "/login"
     assert response.request.path == "/login"    
     assert response.status_code == 200
     assert "account created. you can log in now." in text

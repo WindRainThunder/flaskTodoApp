@@ -1,6 +1,8 @@
 import pytest
-from app.app import app
+from run import app
 import sqlite3
+from app import db
+from app.models import Task, User
 
 @pytest.fixture
 def client():
@@ -22,25 +24,35 @@ def cleanup_users():
 
     yield users_to_delete
 
-    conn = sqlite3.connect("databases/todo.db")
-    cursor = conn.cursor()
-
     for username in users_to_delete:
-        cursor.execute("DELETE FROM users WHERE username = ?", (username,))
+        user = User.query.filter_by(
+        username=username
+    ).first()
 
-    conn.commit()
-    conn.close()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+
+
+     
+
+
+
 
 @pytest.fixture
 def cleanup_tasks():
     tasks_to_delete = []
+
     yield tasks_to_delete
 
-    conn = sqlite3.connect("databases/todo.db")
-    cursor = conn.cursor()
-
     for task in tasks_to_delete:
-        cursor.execute("DELETE FROM tasks WHERE title = ? and description = ?", (task["title"],task["description"],))
+        task = Task.query.filter_by(
+        title=task["title"],
+        description=task["description"]
+    ).first()
 
-    conn.commit()
-    conn.close()
+    if task:
+        db.session.delete(task)
+        db.session.commit()
+
+    
