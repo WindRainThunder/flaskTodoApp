@@ -1,5 +1,5 @@
 import pytest
-from app import app
+from app.app import app
 import sqlite3
 
 @pytest.fixture

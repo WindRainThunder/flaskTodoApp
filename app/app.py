@@ -86,7 +86,7 @@ def login():
             session["user_id"] = user["id"]
             session["username"] = user["username"]
             return redirect(url_for("index"))
-
+        
         flash("Invalid username or password.")
         return redirect(url_for("login"))
 
