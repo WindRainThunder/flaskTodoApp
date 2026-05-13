@@ -29,4 +29,3 @@ jobs:
         env:
           SECRET_KEY: test-secret-key
         run: python -m pytest -v
-        working-directory: flaskTodoApp
