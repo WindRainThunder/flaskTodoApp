@@ -9,7 +9,7 @@ def create_app():
 
     base_dir = os.path.abspath(os.path.dirname(__file__))
     project_root = os.path.dirname(base_dir)
-    db_path = os.path.join(project_root, "app\\databases", "todo.db")    
+    db_path = os.path.join(project_root, "app", "databases", "todo.db") 
     app.config["SECRET_KEY"] = "secret"
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

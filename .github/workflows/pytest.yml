@@ -2,9 +2,9 @@ name: Pytest CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   test:
@@ -28,4 +28,5 @@ jobs:
       - name: Run pytest
         env:
           SECRET_KEY: test-secret-key
-        run: pytest -v
+        run: python -m pytest -v
+        working-directory: flaskTodoApp
