@@ -2,3 +2,10 @@ __pycache__
 flaskToDoApp
 starter.bat
 node_modules
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

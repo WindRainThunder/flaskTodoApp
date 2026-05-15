@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "��#\u0000 \u0000f\u0000l\u0000a\u0000s\u0000k\u0000T\u0000o\u0000d\u0000o\u0000A\u0000p\u0000p\u0000\r\u0000 \u0000",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WindRainThunder/flaskTodoApp.git"
@@ -19,7 +17,9 @@
   },
   "homepage": "https://github.com/WindRainThunder/flaskTodoApp#readme",
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/cli": "^4.2.4",
+    "@types/node": "^25.8.0",
     "tailwindcss": "^4.2.4"
   }
 }
