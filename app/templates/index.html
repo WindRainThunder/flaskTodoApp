@@ -37,13 +37,14 @@
 
         <form action="/add" method="post" class="space-y-5">
             <div>
-                <label for="title" class="block text-sm font-semibold text-slate-800">Title</label>
+                <label id="newTitle" for="title" class="block text-sm font-semibold text-slate-800">Title</label>
                 <input id="title" name="title" type="text" placeholder="Enter title..." required
                     class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-300">
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-semibold text-slate-800">Description</label>
+                <label id="newDescription" for="description"
+                    class="block text-sm font-semibold text-slate-800">Description</label>
                 <textarea id="description" name="description" rows="4" placeholder="Enter description..." required
                     class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-300"></textarea>
             </div>
@@ -70,25 +71,28 @@
     <div class="grid grid-cols-4 ">
         {% for task in tasks %}
         {% if task["status"] == "todo" %}
-        <div
+        <div id="cointainer-task-title-{{ task['title'] }}-task-status-{{ task['status'] }}-task-description-{{ task['description'] }}"
             class="bg-[#fff7a6] rounded-sm p-6 shadow-[0_10px_20px_rgba(0,0,0,0.14)] rotate-[-1deg] flex flex-col min-h-[320px] border border-yellow-200">
             <div class="space-y-4 flex-1">
                 <div>
-                    <p class="mt-2 text-2xl font-extrabold leading-tight text-slate-900 break-words">Title: {{
+                    <p id="task-title-{{ task['title'] }}"
+                        class="mt-2 text-2xl font-extrabold leading-tight text-slate-900 break-words">Title: {{
                         task["title"] }}</p>
-                    <p class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Status: {{
+                    <p id="task-status-{{ task['status'] }}"
+                        class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Status: {{
                         task["status"] }}</p>
-                    <p class="text-xs uppercase tracking-[0.18em] text-slate-500 break-words">Description: {{
+                    <p id="task-description-{{ task['description'] }}"
+                        class="text-xs uppercase tracking-[0.18em] text-slate-500 break-words">Description: {{
                         task["description"] }}</p>
 
                     <div class="flex gap-3 pt-6 mt-auto">
                         <form class="w-1/2" action="{{url_for('.update_task', task_id=task['id']) }}" method="post">
-                            <button id="complete-button"
+                            <button id="cointainer-task-title-{{ task['title'] }}-task-status-{{ task['status'] }}-task-description-{{ task['description'] }}-complete-button"
                                 class="w-full rounded-lg bg-green-900 px-4 py-3 text-sm font-semibold text-white hover:bg-green-800 transition"
                                 type="submit">Completed</button>
                         </form>
                         <form class="w-1/2" action="{{url_for('.delete_task', task_id=task['id']) }}" method="post">
-                            <button id="delete-button"
+                            <button id="cointainer-task-title-{{ task['title'] }}-task-status-{{ task['status'] }}-task-description-{{ task['description'] }}-delete-button"
                                 class="w-full rounded-lg bg-rose-700 px-4 py-3 text-sm font-semibold text-white hover:bg-rose-800 transition"
                                 type="submit">Delete</button>
                         </form>
@@ -105,13 +109,16 @@
     <div class="grid grid-cols-4">
         {% for task in tasks %}
         {% if task["status"] == "completed" %}
-        <div
+        <div id="cointainer-completed-task-title-{{ task['title'] }}-task-status-{{ task['status'] }}-completed-task-description-{{ task['description'] }}"
             class="bg-[#fff7a6] rounded-sm p-6 shadow-[0_10px_20px_rgba(0,0,0,0.14)] rotate-[-1deg] flex flex-col min-h-[320px] border border-yellow-200">
-            <p class="mt-2 text-2xl font-extrabold leading-tight text-slate-900 break-words">Title: {{ task["title"] }}
+            <p id="completed-task-title-{{ task['title'] }}"
+                class="mt-2 text-2xl font-extrabold leading-tight text-slate-900 break-words">Title: {{ task["title"] }}
                 </h3>
-            <p class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Status: {{
+            <p id="completed-task-status-{{ task['status'] }}"
+                class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Status: {{
                 task["status"] }}</p>
-            <p class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Description: {{
+            <p id="completed-task-description-{{ task['description'] }}"
+                class="mt-1 text-xl font-semibold text-slate-900 break-words leading-tight">Description: {{
                 task["description"] }}</p>
 
         </div>
