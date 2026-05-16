@@ -1,8 +1,7 @@
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
-
-db = SQLAlchemy()
+from flask import Flask
+from app.extensions import db
 
 def create_app():
     app = Flask(__name__)
@@ -18,5 +17,10 @@ def create_app():
 
     from app.routes import bp
     app.register_blueprint(bp)
+    
+
+    with app.app_context():
+        from app.startup import clear_test_user_tasks
+        clear_test_user_tasks()
 
     return app

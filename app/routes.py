@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
-from app import db
+from app.extensions import db
 from app.models import Task, User
 
 bp = Blueprint("main", __name__)
